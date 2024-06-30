@@ -1,2 +1,2 @@
-# Lea
-Lea Game Gngine
+# Hazel
+Hazel Game Engine
