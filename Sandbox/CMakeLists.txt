@@ -1,11 +1,22 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(Sandbox VERSION 0.1 LANGUAGES C CXX)
 add_executable(Sandbox src/main.cpp)
 
-target_compile_definitions(Sandbox PUBLIC HZ_PLATFORM_WINDOWS)
+set(SourceFiles src/main.cpp)
+set(HeaderFiles)
 
+add_custom_command(
+	TARGET Sandbox PRE_LINK
+	COMMAND ${CMAKE_COMMAND} -E copy
+		${CMAKE_SOURCE_DIR}/Hazel/Debug/Hazel.dll
+		${CMAKE_CURRENT_SOURCE_DIR}/Debug/Hazel.dll
+)
+
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SourceFiles} ${HeaderFiles})
+
+target_link_libraries(Sandbox PRIVATE Hazel)
+target_compile_definitions(Sandbox PRIVATE HZ_PLATFORM_WINDOWS)
 target_include_directories(Sandbox
-PUBLIC "${CMAKE_SOURCE_DIR}/Hazel/src/"
-PUBLIC "${CMAKE_SOURCE_DIR}/Hazel/vendor/spdlog/include"
+	PUBLIC "${CMAKE_SOURCE_DIR}/Hazel/src/"
+	PUBLIC "${CMAKE_SOURCE_DIR}/Hazel/vendor/spdlog/include"
 )

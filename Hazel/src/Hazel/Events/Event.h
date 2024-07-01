@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Hazel/Core.h"
+#include "Core.h"
 
 #include <string>
 #include <sstream>

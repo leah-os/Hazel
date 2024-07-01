@@ -8,10 +8,7 @@ int main(int argc, char **argv)
 {
 	Hazel::Log::Init();
 
-	HZ_CORE_INFO("Hazel Engine");
-
-	HZ_CRITICAL("Fatal in application");
-
+	HZ_CORE_INFO("Welcome to Hazel Engine");
 
 	auto app = Hazel::CreateApplication();
 	app->Run();
