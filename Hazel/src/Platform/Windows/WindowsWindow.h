@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Window.h"
+#include "Hazel/Window.h"
 #include <GLFW/glfw3.h>
 
-#include "Events/ApplicationEvent.h"
-#include "Events/MouseEvent.h"
-#include "Events/KeyEvent.h"
+#include "Hazel/Events/ApplicationEvent.h"
+#include "Hazel/Events/MouseEvent.h"
+#include "Hazel/Events/KeyEvent.h"
 
 namespace Hazel {
 	
@@ -36,6 +36,7 @@ namespace Hazel {
 			EventCallbackFn EventCallback;
 			bool VSync;
 		};
+
 		WindowData m_Data;
 	};
 

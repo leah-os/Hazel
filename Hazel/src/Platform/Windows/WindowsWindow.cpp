@@ -1,3 +1,4 @@
+#include <glad/gl.h>
 #include "WindowsWindow.h"
 
 namespace Hazel {
@@ -47,6 +48,13 @@ namespace Hazel {
 
 		m_Window = glfwCreateWindow(m_Data.Width, m_Data.Height, m_Data.Title.c_str(), 0, 0);
 		glfwMakeContextCurrent(m_Window);
+		int version = gladLoadGL(glfwGetProcAddress);
+		if (version == 0) {
+			HZ_CORE_ERROR("Couldn`t initialize OpenGL context");
+			HZ_CORE_ASSERT(version, "Couldn`t initialize OpenGL context");
+		}
+		HZ_CORE_INFO("Loaded OpenGL {0}.{1}", GLAD_VERSION_MAJOR(version), GLAD_VERSION_MINOR(version));
+
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 

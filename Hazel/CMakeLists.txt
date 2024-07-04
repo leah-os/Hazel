@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
 
 set(SourceFiles 
-    src/Hazel/Application.cpp src/Hazel/Log.cpp)
+    src/Hazel/Application.cpp src/Hazel/Log.cpp src/Hazel/Layer.cpp src/Hazel/LayerStack.cpp)
 
 set(HeaderFiles 
     src/Hazel.h    
+    src/Hazel/Layer.h src/Hazel/LayerStack.h
     src/Hazel/Application.h src/Hazel/Core.h src/Hazel/EntryPoint.h src/Hazel/Log.h src/Hazel/Window.h
     src/Hazel/Events/Event.h src/Hazel/Events/ApplicationEvent.h src/Hazel/Events/KeyEvent.h src/Hazel/Events/MouseEvent.h
 )
@@ -37,15 +38,18 @@ endif()
 
 target_include_directories(
     Hazel
-    PUBLIC "${CMAKE_SOURCE_DIR}/Hazel/src/Hazel"
+    PUBLIC "${CMAKE_SOURCE_DIR}/Hazel/src"
     PUBLIC "${CMAKE_SOURCE_DIR}/Hazel/vendor/glfw/include"
+    PUBLIC "${CMAKE_SOURCE_DIR}/Hazel/vendor/glad/include"
     PUBLIC "${CMAKE_SOURCE_DIR}/Hazel/vendor/spdlog/include"
 )
 
 if(WIN32)
-    target_link_libraries(Hazel opengl32)
+    target_link_libraries(Hazel PRIVATE opengl32)
 endif()
 
 target_link_libraries(
-    Hazel glfw
+    Hazel
+	PRIVATE glfw
+	PRIVATE glad
 )

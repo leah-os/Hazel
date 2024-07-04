@@ -1,14 +1,19 @@
 #include "Application.h"
-#include "Events/ApplicationEvent.h"
+
+#include <glad/gl.h>
 
 namespace Hazel {
 
-#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
+#define HZ_BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
 
 	Application::Application()
 	{
 		m_Window = std::unique_ptr<Window>(Window::Create());
-		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+		m_Window->SetEventCallback(HZ_BIND_EVENT_FN(Application::OnEvent));
+
+		unsigned int id;
+		glGenVertexArrays(1, &id);
+
 	}
 
 	Application::~Application()
@@ -20,13 +25,41 @@ namespace Hazel {
 	{
 		while (m_Running)
 		{
+			for (Layer* layer : m_LayerStack) {
+				layer->OnUpdate();
+			}
+
 			m_Window->OnUpdate();
 		}
 	}
 
+	void Application::PushLayer(Layer* layer)
+	{
+		m_LayerStack.PushLayer(layer);
+	}
+
+	void Application::PushOverlay(Layer* overlay)
+	{
+		m_LayerStack.PushOverlay(overlay);
+	}
+
 	void Application::OnEvent(Event& e)
 	{
-		HZ_INFO("{0}", e.ToString());
+		HZ_CORE_INFO("{0}", e.ToString());
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<WindowCloseEvent>(HZ_BIND_EVENT_FN(Application::OnWindowClose));
+		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
+		{
+			(*--it)->OnEvent(e);
+			if (e.IsHandled())
+				break;
+		}
+	}
+
+	bool Application::OnWindowClose(Event& e)
+	{
+		m_Running = false;
+		return true;
 	}
 
 

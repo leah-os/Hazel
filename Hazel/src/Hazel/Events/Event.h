@@ -44,6 +44,8 @@ namespace Hazel {
 			return GetCategoryFlags() & category;
 		}
 
+		inline bool IsHandled() const { return m_Handled; }
+
 	protected:
 		bool m_Handled = false;
 	};
@@ -53,5 +55,24 @@ namespace Hazel {
 		os << e.ToString();
 		return os;
 	}
+
+	class EventDispatcher {
+	public:
+		EventDispatcher(Event& e)
+			: m_Event(e) {}
+
+		template<typename T, typename F>
+		bool Dispatch(const F& func)
+		{
+			if (m_Event.GetEventType() == T::GetStaticType())
+			{
+				m_Event.m_Handled = func(static_cast<T&>(m_Event));
+				return true;
+			}
+			return false;
+		}
+	private:
+		Event& m_Event;
+	};
 
 }
