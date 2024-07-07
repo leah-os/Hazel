@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core.h"
+#include "Hazel/Core.h"
 
 #include <string>
 #include <sstream>
@@ -11,7 +11,7 @@ namespace Hazel {
 	enum class EventType {
 		None = 0,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
-		KeyPressed, KeyReleased,
+		KeyPressed, KeyReleased, KeyTyped,
 		AppTick, AppUpdate, AppRender,
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};

@@ -5,12 +5,14 @@ add_executable(Sandbox src/main.cpp)
 set(SourceFiles src/main.cpp)
 set(HeaderFiles)
 
-add_custom_command(
-	TARGET Sandbox PRE_LINK
-	COMMAND ${CMAKE_COMMAND} -E copy
-		${CMAKE_SOURCE_DIR}/Hazel/Debug/Hazel.dll
-		${CMAKE_CURRENT_SOURCE_DIR}/Debug/Hazel.dll
-)
+if(WIN32)
+	add_custom_command(
+		TARGET Sandbox PRE_LINK
+		COMMAND ${CMAKE_COMMAND} -E copy
+			${CMAKE_SOURCE_DIR}/Hazel/Debug/Hazel.dll
+			${CMAKE_CURRENT_SOURCE_DIR}/Debug/Hazel.dll
+	)
+endif()
 
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SourceFiles} ${HeaderFiles})
 

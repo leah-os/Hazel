@@ -35,7 +35,7 @@ namespace Hazel {
 			return ss.str();
 		}
 		inline float GetXOffset() const { return m_XOffset; }
-		inline float GetYPffset() const { return m_YOffset; }
+		inline float GetYOffset() const { return m_YOffset; }
 
 		EVENT_CLASS_TYPE(MouseScrolled);
 		EVENT_CLASS_CATEGORY(EventCategoryInput | EventCategoryMouse);

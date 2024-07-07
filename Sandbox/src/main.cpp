@@ -29,10 +29,11 @@ public:
 	{
 		HZ_INFO("Sandbox started");
 		PushLayer(new ExampleLayer());
+		PushLayer(new Hazel::ImGuiLayer());
 	}
 	~Sandbox()
 	{
-		HZ_INFO("Sandbox terminated");
+		HZ_INFO("Sandbox term");
 	}
 };
 

@@ -1,23 +1,26 @@
-/*
 #pragma once
 
+#include "Hazel/Window.h"
 #include <GLFW/glfw3.h>
-#include "Window.h"
+
+#include "Hazel/Events/ApplicationEvent.h"
+#include "Hazel/Events/MouseEvent.h"
+#include "Hazel/Events/KeyEvent.h"
 
 namespace Hazel {
 
-	class HZAPI UnixWindow : public Window
+	class HZAPI WindowsWindow : public Window
 	{
 	public:
-		UnixWindow(const WindowProps& props);
-		virtual ~UnixWindow();
+		WindowsWindow(const WindowProps& props);
+		virtual ~WindowsWindow();
 
 		virtual void OnUpdate() override;
 
 		inline unsigned int GetWidth() const override { return m_Data.Width; }
 		inline unsigned int GetHeight() const override { return m_Data.Height; }
 
-		inline  void SetEventCallback(EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
+		virtual inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
 		virtual void SetVSync(bool enabled) override;
 		virtual bool IsVSync() const override;
 
@@ -33,8 +36,9 @@ namespace Hazel {
 			EventCallbackFn EventCallback;
 			bool VSync;
 		};
+
 		WindowData m_Data;
 	};
 
+
 }
-*/

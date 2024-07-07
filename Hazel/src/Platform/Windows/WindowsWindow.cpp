@@ -131,6 +131,13 @@ namespace Hazel {
 				MouseScrolledEvent e((float)xoffset, (float)yoffset);
 				data.EventCallback(e);
 			});
+		
+		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode)
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+				KeyTypedEvent e(keycode);
+				data.EventCallback(e);
+			});
 	}
 
 
