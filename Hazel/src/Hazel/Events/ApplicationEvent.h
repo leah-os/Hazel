@@ -3,7 +3,7 @@
 
 namespace Hazel
 {
-	class HZAPI WindowResizeEvent : public Event
+	class WindowResizeEvent : public Event
 	{
 	public:
 		WindowResizeEvent(int width, int height)
@@ -25,7 +25,7 @@ namespace Hazel
 		unsigned int m_Width, m_Height;
 	};
 
-	class HZAPI WindowCloseEvent : public Event
+	class WindowCloseEvent : public Event
 	{
 	public:
 		WindowCloseEvent() { }
@@ -41,7 +41,7 @@ namespace Hazel
 		EVENT_CLASS_CATEGORY(EventCategoryApplication);
 	};
 
-	class HZAPI AppTickEvent : public Event
+	class AppTickEvent : public Event
 	{
 	public:
 		AppTickEvent() { }
@@ -57,7 +57,7 @@ namespace Hazel
 		EVENT_CLASS_CATEGORY(EventCategoryApplication);
 	};
 
-	class HZAPI AppUpdateEvent : public Event
+	class AppUpdateEvent : public Event
 	{
 	public:
 		AppUpdateEvent() { }
@@ -73,7 +73,7 @@ namespace Hazel
 		EVENT_CLASS_CATEGORY(EventCategoryApplication);
 	};
 
-	class HZAPI AppRenderEvent : public Event
+	class AppRenderEvent : public Event
 	{
 	public:
 		AppRenderEvent() { }

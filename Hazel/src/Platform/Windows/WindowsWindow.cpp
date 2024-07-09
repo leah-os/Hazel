@@ -41,7 +41,7 @@ namespace Hazel {
 
 		if (!s_GLFWInitialized) {
 			int success = glfwInit();
-			HZ_CORE_ASSERT(success, "Couldn`t initialize GLFW!");
+			HZ_CORE_ASSERT(success && "Couldn`t initialize GLFW!");
 			glfwSetErrorCallback(GLFWErrorCallback);
 			s_GLFWInitialized = true;
 		}
@@ -51,7 +51,7 @@ namespace Hazel {
 		int version = gladLoadGL(glfwGetProcAddress);
 		if (version == 0) {
 			HZ_CORE_ERROR("Couldn`t initialize OpenGL context");
-			HZ_CORE_ASSERT(version, "Couldn`t initialize OpenGL context");
+			HZ_CORE_ASSERT(version && "Couldn`t initialize OpenGL context");
 		}
 		HZ_CORE_INFO("Loaded OpenGL {0}.{1}", GLAD_VERSION_MAJOR(version), GLAD_VERSION_MINOR(version));
 

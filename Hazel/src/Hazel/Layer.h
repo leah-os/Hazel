@@ -3,9 +3,8 @@
 #include <string>
 #include "Events/Event.h"
 
-
 namespace Hazel {
-	class HZAPI Layer
+	class Layer
 	{
 	public:
 		Layer(const std::string name = "Layer");
@@ -15,6 +14,7 @@ namespace Hazel {
 		virtual void OnDetach() {}
 		virtual void OnUpdate() {}
 		virtual void OnEvent(Event& e) {}
+		virtual void OnImGuiRender() {}
 
 		inline const std::string& GetName() { return m_DebugName; }
 

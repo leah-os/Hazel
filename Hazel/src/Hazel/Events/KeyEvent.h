@@ -3,7 +3,7 @@
 
 namespace Hazel {
 
-	class HZAPI KeyEvent : public Event
+	class KeyEvent : public Event
 	{
 	public:
 		KeyEvent(int KeyCode)
@@ -17,7 +17,7 @@ namespace Hazel {
 		int m_KeyCode;
 	};
 
-	class HZAPI KeyPressedEvent : public KeyEvent
+	class KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(int KeyCode, int repeatCount)
@@ -37,7 +37,7 @@ namespace Hazel {
 		int m_RepeatCount;
 	};
 
-	class HZAPI KeyReleasedEvent : public KeyEvent
+	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(int KeyCode)
@@ -53,7 +53,7 @@ namespace Hazel {
 		EVENT_CLASS_TYPE(KeyReleased);
 	};
 
-	class HZAPI KeyTypedEvent : public KeyEvent
+	class KeyTypedEvent : public KeyEvent
 	{
 	public:
 		KeyTypedEvent(int KeyCode)

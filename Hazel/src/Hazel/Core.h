@@ -7,23 +7,16 @@
 #define HZ_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
 
 #if defined HZ_PLATFORM_WINDOWS
-	#ifdef HZ_SHARED_LIB
-		#define HZAPI __declspec(dllexport)
-	#else
-		#define HZAPI __declspec(dllimport)
-	#endif
+	#define HZ_DEBUG_BREAK __debugbreak()
 #elif defined HZ_PLATFORM_UNIX
-	#ifdef HZ_SHARED_LIB
-		#define HZAPI __attribute__((visibility("default")))
-	#else
-		#define HZAPI
-	#endif
+	#include <signal.h>
+	#define HZ_DEBUG_BREAK raise(SIGTRAP)
 #else
 	#error Hazel doesn`t support other platforms yet
 #endif
 
 #ifdef _DEBUG
-	#define HZ_CORE_ASSERT(x, ...) assert(x, __VA_ARGS__)
+	#define HZ_CORE_ASSERT(x) assert((x))
 #else
-	#define HZ_CORE_ASSERT(x, ...)
+	#define HZ_CORE_ASSERT(x)
 #endif

@@ -3,7 +3,7 @@
 
 namespace Hazel {
 
-	class HZAPI MouseMovedEvent : public Event
+	class MouseMovedEvent : public Event
 	{
 	public:
 		MouseMovedEvent(float x, float y)
@@ -23,7 +23,7 @@ namespace Hazel {
 		float m_MouseX, m_MouseY;
 	};
 
-	class HZAPI MouseScrolledEvent : public Event
+	class MouseScrolledEvent : public Event
 	{
 	public:
 		MouseScrolledEvent(float x, float y)
@@ -44,7 +44,7 @@ namespace Hazel {
 		float m_XOffset, m_YOffset;
 	};
 
-	class HZAPI MouseButtonEvent : public Event
+	class MouseButtonEvent : public Event
 	{
 	public:
 		inline int GetMouseButton() const { return m_Button; }
@@ -57,7 +57,7 @@ namespace Hazel {
 		int m_Button;
 	};
 
-	class HZAPI MouseButtonPressedEvent : public MouseButtonEvent
+	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonPressedEvent(int button)
@@ -71,7 +71,7 @@ namespace Hazel {
 		EVENT_CLASS_TYPE(MouseButtonPressed);
 	};
 
-	class HZAPI MouseButtonReleasedEvent : public MouseButtonEvent
+	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonReleasedEvent(int button)

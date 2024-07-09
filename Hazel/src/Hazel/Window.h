@@ -19,7 +19,7 @@ namespace Hazel {
 			: Title(title), Width(width), Height(height) {}
 	};
 
-	class HZAPI Window
+	class Window
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;
@@ -29,6 +29,8 @@ namespace Hazel {
 
 		virtual unsigned int GetWidth() const = 0;
 		virtual unsigned int GetHeight() const = 0;
+
+		virtual void* GetNativeWindow() const = 0;
 
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
 		virtual void SetVSync(bool enabled) = 0;

@@ -1,5 +1,7 @@
 #include "Application.h"
 
+#include "Input.h"
+
 #include <glad/gl.h>
 
 namespace Hazel {
@@ -10,15 +12,11 @@ namespace Hazel {
 
 	Application::Application()
 	{
-		HZ_CORE_ASSERT(!s_Instance, "Application already exists!");
+		HZ_CORE_ASSERT(!s_Instance && "Application already exists!");
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(HZ_BIND_EVENT_FN(Application::OnEvent));
 		
 		s_Instance = this;
-
-		unsigned int id;
-		glGenVertexArrays(1, &id);
-
 	}
 
 	Application::~Application()
@@ -30,10 +28,15 @@ namespace Hazel {
 	{
 		while (m_Running)
 		{
+			glClear(GL_COLOR_BUFFER_BIT);
 			for (Layer* layer : m_LayerStack) {
 				layer->OnUpdate();
 			}
-
+			m_ImGuiLayer->Begin();
+			for (Layer* layer : m_LayerStack) {
+				layer->OnImGuiRender();
+			}
+			m_ImGuiLayer->End();
 			m_Window->OnUpdate();
 		}
 	}
@@ -41,16 +44,17 @@ namespace Hazel {
 	void Application::PushLayer(Layer* layer)
 	{
 		m_LayerStack.PushLayer(layer);
+		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* overlay)
 	{
 		m_LayerStack.PushOverlay(overlay);
+		overlay->OnAttach();
 	}
 
 	void Application::OnEvent(Event& e)
 	{
-		HZ_CORE_INFO("{0}", e.ToString());
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(HZ_BIND_EVENT_FN(Application::OnWindowClose));
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)

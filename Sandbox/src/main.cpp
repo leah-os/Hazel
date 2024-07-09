@@ -1,24 +1,23 @@
 #include <Hazel.h>
 
+#include "imgui.h"
+
 class ExampleLayer : public Hazel::Layer
 {
 public:
 	ExampleLayer()
 	{
-
+		HZ_INFO("ExampleLayer started");
 	}
 	~ExampleLayer()
 	{
-
+		HZ_INFO("ExampleLayer terminated");
 	}
-	
-	void OnUpdate() override
+	void OnImGuiRender() override
 	{
-	}
-
-	void OnEvent(Hazel::Event& event)
-	{
-		HZ_TRACE("{0}", event.ToString());
+		ImGui::Begin("Test");
+		ImGui::Text("Example Layer");
+		ImGui::End();
 	}
 };
 
@@ -33,7 +32,7 @@ public:
 	}
 	~Sandbox()
 	{
-		HZ_INFO("Sandbox term");
+		HZ_INFO("Sandbox terminated!");
 	}
 };
 

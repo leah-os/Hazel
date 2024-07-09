@@ -11,7 +11,7 @@
 
 namespace Hazel {
 
-	class HZAPI Log
+	class Log
 	{
 	public:
 		static void Init();
