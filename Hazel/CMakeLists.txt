@@ -36,10 +36,9 @@ target_sources(Hazel
         PRIVATE src/Platform/Windows/WindowsWindow.h
         PRIVATE src/Platform/Windows/WindowsInput.cpp
         PRIVATE src/Platform/Windows/WindowsInput.h
-
 )
-source_group
-(
+
+source_group(
     TREE 
     ${CMAKE_CURRENT_SOURCE_DIR} 
     FILES 
