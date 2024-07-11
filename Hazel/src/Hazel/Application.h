@@ -8,6 +8,8 @@
 #include "ImGui/ImGuiLayer.h"
 #include "Events/ApplicationEvent.h"
 
+#include "Hazel/Renderer/Buffer.h"
+
 namespace Hazel {
 	class Application
 	{
@@ -30,6 +32,8 @@ namespace Hazel {
 
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+		VertexBuffer* m_VertexBuffer;
+		IndexBuffer* m_IndexBuffer;
 	public:
 		static Application* s_Instance;
 	};

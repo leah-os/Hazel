@@ -2,7 +2,15 @@
 .vs/
 bin/
 bin-int/
+CMakeFiles/
+Debug/
+CMakeCache/
 
 # Files
-*.usergit `
+*.sln
 *.user
+*.cmake
+*.usergit
+imgui.ini
+*.vcxproj*
+CMakeCache.txt
