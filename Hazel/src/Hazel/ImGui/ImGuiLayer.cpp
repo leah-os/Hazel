@@ -62,8 +62,6 @@ namespace Hazel {
 
 	void ImGuiLayer::OnImGuiRender()
 	{
-		bool show_demo = true;
-		ImGui::ShowDemoWindow(&show_demo);
 	}
 
 	void ImGuiLayer::Begin()

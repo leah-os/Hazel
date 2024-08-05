@@ -1,11 +1,41 @@
 #pragma once
 
 #include <memory>
+#include <sstream>
 
 #pragma warning(push, 0)
 #include <spdlog/spdlog.h>
 #include <spdlog/fmt/ostr.h>
 #pragma warning(pop)
+
+#include <glm/glm.hpp>
+
+template<>
+struct fmt::formatter<glm::mat4> : fmt::formatter<std::string>
+{
+	auto format(glm::mat4 matrix, format_context& ctx) const -> decltype(ctx.out())
+	{
+		std::stringstream ss;
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				ss << matrix[i][j] << " ";
+			}
+			ss << std::endl;
+		}
+		return fmt::format_to(ctx.out(), ss.str());
+	}
+};
+
+template<>
+struct fmt::formatter<glm::vec3> : fmt::formatter<std::string>
+{
+	auto format(glm::vec3 vector, format_context& ctx) const -> decltype(ctx.out())
+	{
+		std::stringstream ss;
+		ss << vector.x << " " << vector.y << " " << vector.z << std::endl;
+		return fmt::format_to(ctx.out(), ss.str());
+	}
+};
 
 namespace Hazel {
 

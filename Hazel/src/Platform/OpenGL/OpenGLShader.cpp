@@ -6,31 +6,71 @@
 
 #include "Hazel/Core.h"
 
+#include "glm/gtc/type_ptr.hpp"
+
 namespace Hazel {
 
-    Shader::Shader(const std::string& filePath)
+    OpenGLShader::OpenGLShader(const std::string& filePath)
     {
         ShaderProgramSource src = ParseShader(filePath);
-        m_Id = CreateShader(src.VertexSource, src.FragmentSource);
-        HZ_CORE_INFO("SHADER ID: {0}", m_Id);
+        m_RendererID = CreateShader(src.VertexSource, src.FragmentSource);
+        HZ_CORE_INFO("SHADER ID: {0}", m_RendererID);
     }
 
-    Shader::~Shader()
+    OpenGLShader::~OpenGLShader()
     {
-        glDeleteProgram(m_Id);
+        glDeleteProgram(m_RendererID);
     }
 
-    void Shader::Bind() const
+    void OpenGLShader::Bind() const
     {
-        glUseProgram(m_Id);
+        glUseProgram(m_RendererID);
     }
 
-    void Shader::Unbind() const
+    void OpenGLShader::Unbind() const
     {
         glUseProgram(0);
     }
 
-    ShaderProgramSource Shader::ParseShader(const std::string& filePath)
+
+    void OpenGLShader::SetInt(const std::string& name, int value)
+    {
+        GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+        glUniform1i(location, value);
+    }
+    void OpenGLShader::SetIntArray(const std::string& name, int* values, uint32_t count)
+    {
+        GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+        glUniform1iv(location, count, values);
+    }
+    void OpenGLShader::SetFloat(const std::string& name, float value)
+    {
+        GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+        glUniform1f(location, value);
+    }
+    void OpenGLShader::SetFloat2(const std::string& name, const glm::vec2& value)
+    {
+        GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+        glUniform2f(location, value.x, value.y);
+    }
+    void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value)
+    {
+        GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+        glUniform3f(location, value.x, value.y, value.z);
+    }
+    void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& value)
+    {
+        GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+        glUniform4f(location, value.x, value.y, value.z, value.w);
+    }
+
+    void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value)
+    {
+        GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+        glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
+    }
+
+    ShaderProgramSource OpenGLShader::ParseShader(const std::string& filePath)
     {
         ShaderProgramSource sourceCode;
         std::string line;
@@ -54,13 +94,11 @@ namespace Hazel {
                 }
             }
         }
-        HZ_CORE_INFO("Vertex: {}", sourceCode.VertexSource);
-        HZ_CORE_INFO("Fragment: {}", sourceCode.FragmentSource);
 
         return sourceCode;
     }
 
-    unsigned int Shader::CompileShader(unsigned int type, const char* source)
+    unsigned int OpenGLShader::CompileShader(unsigned int type, const char* source)
     {
         unsigned int shader = glCreateShader(type);
         glShaderSource(shader, 1, &source, nullptr);
@@ -86,7 +124,7 @@ namespace Hazel {
         return shader;
     }
 
-    unsigned int Shader::CreateShader(const std::string& VertexSource, const std::string& FragmentSource)
+    unsigned int OpenGLShader::CreateShader(const std::string& VertexSource, const std::string& FragmentSource)
     {
         unsigned int vtxs = CompileShader(GL_VERTEX_SHADER, VertexSource.c_str());
         unsigned int fgms = CompileShader(GL_FRAGMENT_SHADER, FragmentSource.c_str());

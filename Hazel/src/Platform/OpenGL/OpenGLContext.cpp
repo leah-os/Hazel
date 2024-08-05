@@ -28,9 +28,17 @@ namespace Hazel {
 		HZ_CORE_INFO("    Vendor: {}", (const char*)glGetString(GL_VENDOR));
 		HZ_CORE_INFO("    Renderer: {}", (const char*)glGetString(GL_RENDERER));
 		HZ_CORE_INFO("    OpenGL Version: {0}.{1}", GLAD_VERSION_MAJOR(version), GLAD_VERSION_MINOR(version));
+
+		glEnable(GL_DEPTH_TEST);
+		glDepthFunc(GL_LESS);
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 	void OpenGLContext::SwapBuffers()
 	{
+		int width, height;
+		glfwGetFramebufferSize(m_WindowHandle, &width, &height);
+		glViewport(0, 0, width, height);
 		glfwSwapBuffers(m_WindowHandle);
 	}
 

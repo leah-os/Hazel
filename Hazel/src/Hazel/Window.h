@@ -2,8 +2,6 @@
 #include <string>
 #include <functional>
 
-#include "Log.h"
-#include "Core.h"
 #include "Events/Event.h"
 
 

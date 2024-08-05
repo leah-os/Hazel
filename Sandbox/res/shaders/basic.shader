@@ -1,22 +1,25 @@
 #shader vertex
 #version 400 core
-layout (location = 0) in vec3 aPos;
+layout (location = 0) in vec3 aPosition;
 
-out vec3 Position;
+uniform mat4 view;
+uniform mat4 proj;
+uniform mat4 transform;
 
 void main()
 {
-    Position = aPos;
-    gl_Position = vec4(aPos, 1.0);
+    gl_Position = proj * view * transform * vec4(aPosition, 1.0);;
 }
 
 #shader fragment
 #version 400 core
 
-in vec3 Position;
-out vec4 FragColor;
+out vec4 FragColor; 
+
+uniform vec4 color;
+uniform vec4 light;
 
 void main()
 {
-    FragColor = vec4(Position * 0.5 + 0.5, 1.0);
+    FragColor = color * light;
 }

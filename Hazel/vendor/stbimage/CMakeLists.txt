@@ -1,0 +1,1 @@
+add_library(stbimage stb_image.cc)
