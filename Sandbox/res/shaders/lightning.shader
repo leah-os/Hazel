@@ -10,12 +10,10 @@ uniform mat4 model;
 
 out vec3 Normal;
 out vec3 FragPos;
-//out vec2 TexCoord;
 
 void main()
 {
     Normal = mat3(transpose(inverse(model))) * aNormal;
-    //TexCoord = aTexCoord;
     FragPos = vec3(model * vec4(aPosition, 1.0));
     gl_Position = proj * view * model * vec4(aPosition, 1.0);;
 }
@@ -25,29 +23,47 @@ void main()
 
 in vec3 Normal;
 in vec3 FragPos;
-//in vec2 TexCoord;
 
 out vec4 FragColor; 
 
 uniform vec3 ObjColor;
-uniform vec3 LightPos;
 uniform vec3 LightColor;
+uniform vec3 ViewPosition;
 
-//uniform sampler2D ourTexture;
+struct Material {
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+    float shininess;
+};
+
+struct Light {
+    vec3 position;
+
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+};
+
+uniform Light light;
+uniform Material material;
 
 void main()
 {
-    float ambientStrength = 0.2;
-    vec3 ambient = LightColor * ambientStrength;
+    vec3 ambient = LightColor * (light.ambient * material.ambient);
 
     vec3 norm = normalize(Normal);
-    vec3 lightDirection = normalize(LightPos - FragPos);
+    vec3 lightDirection = normalize(light.position - FragPos);
 
     float diff = max(dot(norm, lightDirection), 0.0);
-    vec3 diffuse = diff * LightColor;
+    vec3 diffuse = LightColor * light.diffuse * (diff * material.diffuse);
 
-    //vec4 Color = texture(ourTexture, TexCoord);
+    vec3 viewDir = normalize(ViewPosition - FragPos);
+    vec3 reflectDir = reflect(-light.position, norm);
 
-    vec3 result = (ambient + diffuse) * ObjColor;
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 4);
+    vec3 specular = light.specular * (spec * material.specular) * LightColor;
+
+    vec3 result = (ambient + diffuse + specular) * ObjColor;
     FragColor = vec4(result, 1.0);
 }

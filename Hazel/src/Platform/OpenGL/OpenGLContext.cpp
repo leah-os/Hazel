@@ -1,7 +1,7 @@
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 
-#include "Hazel/Core.h"
+#include "Hazel/Core/Base.h"
 #include "OpenGLContext.h"
 
 namespace Hazel {
@@ -31,8 +31,6 @@ namespace Hazel {
 
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LESS);
-
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 	void OpenGLContext::SwapBuffers()
 	{

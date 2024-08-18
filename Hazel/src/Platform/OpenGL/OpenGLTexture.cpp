@@ -1,5 +1,5 @@
 #include "stb_image.h"
-#include "Hazel/Core.h"
+#include "Hazel/Core/Base.h"
 #include "OpenGLTexture.h"
 
 namespace Hazel {

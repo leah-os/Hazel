@@ -4,7 +4,7 @@
 #include <fstream>
 #include <glad/gl.h>
 
-#include "Hazel/Core.h"
+#include "Hazel/Core/Base.h"
 
 #include "glm/gtc/type_ptr.hpp"
 
@@ -36,11 +36,13 @@ namespace Hazel {
     void OpenGLShader::SetInt(const std::string& name, int value)
     {
         GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+        HZ_CORE_ASSERT(location != -1 && "Uniform doesn`t exist");
         glUniform1i(location, value);
     }
     void OpenGLShader::SetIntArray(const std::string& name, int* values, uint32_t count)
     {
         GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+        HZ_CORE_ASSERT(location != -1 && "Uniform doesn`t exist");
         glUniform1iv(location, count, values);
     }
     void OpenGLShader::SetFloat(const std::string& name, float value)
@@ -51,22 +53,26 @@ namespace Hazel {
     void OpenGLShader::SetFloat2(const std::string& name, const glm::vec2& value)
     {
         GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+        HZ_CORE_ASSERT(location != -1 && "Uniform doesn`t exist");
         glUniform2f(location, value.x, value.y);
     }
     void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value)
     {
         GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+        HZ_CORE_ASSERT(location != -1 && "Uniform doesn`t exist");
         glUniform3f(location, value.x, value.y, value.z);
     }
     void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& value)
     {
         GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+        HZ_CORE_ASSERT(location != -1 && "Uniform doesn`t exist");
         glUniform4f(location, value.x, value.y, value.z, value.w);
     }
 
     void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value)
     {
         GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+        HZ_CORE_ASSERT(location != -1 && "Uniform doesn`t exist");
         glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
     }
 

@@ -1,5 +1,4 @@
 #include "Renderer.h"
-#include "Hazel/Core.h"
 #include "VertexArray.h"
 #include "Platform/OpenGL/OpenGLVertexArray.h"
 

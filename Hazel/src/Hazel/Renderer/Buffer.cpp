@@ -1,6 +1,5 @@
 #include "Buffer.h"
 #include "Renderer.h"
-#include "Hazel/Core.h"
 #include "Platform/OpenGL/OpenGLBuffer.h"
 
 

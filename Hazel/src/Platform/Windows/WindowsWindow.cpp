@@ -66,6 +66,8 @@ namespace Hazel {
 				WindowResizeEvent e(width, height);
 				data.Width = width;
 				data.Height = height;
+				glViewport(0, 0, data.Width, data.Height);
+				HZ_CORE_TRACE("Viewport size: {} {}", data.Width, data.Height);
 				data.EventCallback(e);
 			});
 

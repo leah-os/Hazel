@@ -3,9 +3,11 @@
 
 namespace Hazel
 {
-	void Renderer::BeginScene()
+	void Renderer::BeginScene(PerspectiveCamera &camera)
 	{
-		;
+		//m_ProjectionMatrix = camera.GetProjectionMatrix();
+		//m_ViewMatrix = camera.GetViewMatrix();
+		RenderCommand::Clear();
 	}
 
 	void Renderer::EndScene()
@@ -13,13 +15,12 @@ namespace Hazel
 		;
 	}
 
-	void Renderer::Submit(const std::shared_ptr<VertexArray>& va, const std::shared_ptr<HzModel>& mesh)
+	void Renderer::Clear()
 	{
-		va->Bind();
-		RenderCommand::DrawArrays(va, mesh);
+		RenderCommand::Clear();
 	}
 
-	void Renderer::Submit(const std::shared_ptr<VertexArray>& va)
+	void Renderer::Submit(const Ref<VertexArray>& va)
 	{
 		HZ_CORE_ASSERT(va->GetIndexBuffer() && "Vertex arrays without index buffer");
 		va->Bind();

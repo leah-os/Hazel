@@ -7,13 +7,13 @@ namespace Hazel
 	class RenderCommand
 	{
 	public:
-		static inline void DrawIndexed(const std::shared_ptr<VertexArray>& va)
+		static inline void Clear()
+		{
+			s_RendererAPI->Clear();
+		}
+		static inline void DrawIndexed(const Ref<VertexArray>& va)
 		{
 			s_RendererAPI->DrawIndexed(va);
-		}
-		static inline void DrawArrays(const std::shared_ptr<VertexArray>& va, const std::shared_ptr<HzModel>& mesh)
-		{
-			s_RendererAPI->DrawArrays(va, mesh);
 		}
 	private:
 		static RendererAPI* s_RendererAPI;

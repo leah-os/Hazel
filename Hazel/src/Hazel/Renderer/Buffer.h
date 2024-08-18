@@ -4,7 +4,7 @@
 #include <vector>
 #include <initializer_list>
 
-#include "Hazel/Core.h"
+#include "Hazel/Core/Base.h"
 
 namespace Hazel {
 
@@ -103,7 +103,7 @@ namespace Hazel {
 
 		virtual unsigned int GetCount() const = 0;
 
-		static IndexBuffer* Create(const unsigned int *indices, unsigned int size);
+		static IndexBuffer* Create(const unsigned int* indices, unsigned int size);
 	};
 
 }

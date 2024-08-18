@@ -1,5 +1,5 @@
 #include "WindowsInput.h"
-#include "Hazel/Application.h"
+#include "Hazel/Core/Application.h"
 
 #include <GLFW/glfw3.h>
 
@@ -51,4 +51,22 @@ namespace Hazel {
 		glfwGetCursorPos(window, &xpos, &ypos);
 		return (float)ypos;
 	}
+
+	int WindowsInput::GetWidthImpl() const
+	{
+		Application& app = Application::Get();
+		GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
+		int width = -1, height = -1;
+		glfwGetWindowSize(window, &width, &height);
+		return width;
+	}
+	int WindowsInput::GetHeightImpl() const
+	{
+		Application& app = Application::Get();
+		GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
+		int width = -1, height = -1;
+		glfwGetWindowSize(window, &width, &height);
+		return height;
+	}
+
 }

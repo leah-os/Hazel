@@ -13,3 +13,6 @@
 [submodule "Hazel/vendor/tinyobjloader"]
 	path = Hazel/vendor/tinyobjloader
 	url = https://github.com/tinyobjloader/tinyobjloader
+[submodule "Hazel/vendor/assimp"]
+	path = Hazel/vendor/assimp
+	url = https://github.com/leah-os/assimp

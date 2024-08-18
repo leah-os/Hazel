@@ -4,7 +4,7 @@
 #include <sstream>
 #include <functional>
 
-#include "Hazel/Core.h"
+#include "Hazel/Core/Base.h"
 
 namespace Hazel {
 

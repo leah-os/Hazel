@@ -3,7 +3,6 @@
 #include "Hazel/Renderer/Buffer.h"
 #include "Hazel/Renderer/VertexArray.h"
 
-
 namespace Hazel {
 
 	class OpenGLVertexArray : public VertexArray
@@ -15,14 +14,14 @@ namespace Hazel {
 		void Bind() const override;
 		void Unbind() const override;
 
-		IndexBuffer* GetIndexBuffer() const override;
+		Ref<IndexBuffer> GetIndexBuffer() const override;
 
-		void AddVertexBuffer(VertexBuffer *vb) override;
-		void SetIndexBuffer(IndexBuffer* ib) override;
+		void AddVertexBuffer(Ref<VertexBuffer> vb) override;
+		void SetIndexBuffer(Ref<IndexBuffer> ib) override;
 	private:
 		int m_LastIndex = 0;
 		unsigned int m_RendererID;
-		IndexBuffer* m_IndexBuffer = nullptr;
+		Ref<IndexBuffer> m_IndexBuffer = nullptr;
 	};
 
 }

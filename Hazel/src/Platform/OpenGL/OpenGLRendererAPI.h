@@ -8,8 +8,8 @@ namespace Hazel
 	class OpenGLRendererAPI : public RendererAPI
 	{
 	public:
-		virtual void DrawIndexed(const std::shared_ptr<VertexArray>& va) override;
-		virtual void DrawArrays(const std::shared_ptr<VertexArray>& va, const std::shared_ptr<HzModel>& mesh) override;
+		virtual void Clear() override;
+		virtual void DrawIndexed(const Ref<VertexArray>& va) override;
 	};
 
 }

@@ -1,5 +1,4 @@
 #include "Texture.h"
-#include "Hazel/Core.h"
 #include "Hazel/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLTexture.h"
 
