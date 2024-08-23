@@ -36,6 +36,8 @@ namespace Hazel {
     void OpenGLShader::SetInt(const std::string& name, int value)
     {
         GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+        if(location == -1)
+            HZ_CORE_ERROR("Uniform doesn`t exist: {}", name);
         HZ_CORE_ASSERT(location != -1 && "Uniform doesn`t exist");
         glUniform1i(location, value);
     }

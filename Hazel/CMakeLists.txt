@@ -32,6 +32,8 @@ set(HeaderFiles
 
 add_library(Hazel STATIC ${SourceFiles} ${HeaderFiles})
 
+set_property(TARGET Hazel PROPERTY CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SourceFiles} ${HeaderFiles}) 
 
 target_compile_definitions(Hazel 

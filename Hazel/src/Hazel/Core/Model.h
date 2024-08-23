@@ -17,6 +17,11 @@ namespace Hazel {
 		glm::vec2 texcoord;
 	};
 
+	struct Material
+	{
+
+	};
+
 	class Mesh
 	{
 	public:
